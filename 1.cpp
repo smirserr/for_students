@@ -175,8 +175,6 @@ vector <Record> load_logs(string path)
     return records;
 }
 
-
-
 int main()
 {
     vector<Record> v = load_logs("./logs");
@@ -188,8 +186,6 @@ int main()
         if (dev == i.get_device()) 
             cout << i.get_date() << ' ' << i.get_time()  
                  << " - " << i.get_indication() << endl; 
-
-
 
 
     return 0;
