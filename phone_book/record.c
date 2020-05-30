@@ -27,7 +27,7 @@ record ** read_book(char *fname, record **book)
         insert_rec(book,new_rec);
     }
     fclose(f);
-    printf("Книга успешно прочитана!\n");
+    printf(">> Книга успешно прочитана!\n");
     return book;
 }
 
@@ -90,7 +90,7 @@ int find(char *s, char c)
 
 char *get_name(char *name)
 {   
-    printf("Введите фамилию: ");
+    printf(">> Введите фамилию: ");
     int chek; 
     do
     {
@@ -104,7 +104,7 @@ char *get_name(char *name)
             t = find(big_letters, name[i]);
             if (t == -1) chek = 0;;
         }
-        if (!chek) printf("Недопустимые символы, повторите ввод: ");
+        if (!chek) printf(">> Недопустимые символы, повторите ввод: ");
     }while(!chek);
 
     return name;
@@ -112,7 +112,7 @@ char *get_name(char *name)
 
 char *get_phone(char *phone)
 {   
-    printf("Введите телефон: ");
+    printf(">> Введите телефон: ");
     int chek = 1;
     do
     {
@@ -121,7 +121,7 @@ char *get_phone(char *phone)
         if (strlen(phone) == 0) chek = 0;
         for(int i = 0; (phone[i] != '\0') && chek; i++)
             if ((phone[i] < '0') || (phone[i] > '9')) chek = 0;
-        if (!chek) printf("Недопустимые символы, повторите ввод: ");
+        if (!chek) printf(">> Недопустимые символы, повторите ввод: ");
     }while(!chek);
     
     return phone;
@@ -189,15 +189,12 @@ int update_record(record **book)
     char *number;
     if (! get_name(name)) 
     {
-        printf("Запись не найдена, прерывание.\n");
+        printf(">> Запись не найдена, прерывание.\n");
         return 0;
     }
     record * rec = search_record(book,name);
     if (rec == NULL) return 0;
-    while (! get_phone(number))
-    {
-        printf("Некорректный номер! Повторите ввод:\n");
-    } 
+    get_phone(number);
     strcpy(rec->number,number);
     return 1;
 }
