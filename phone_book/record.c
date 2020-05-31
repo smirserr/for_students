@@ -185,16 +185,41 @@ int delete_record(record **book, char *name)
 
 int update_record(record **book)
 {
-    char *name;
-    char *number;
-    if (! get_name(name)) 
+    char name[LEN_S];
+    char number[LEN_P];
+    get_name(name); 
+    
+    record * rec = search_record(book,name);
+    if (rec == NULL)
     {
         printf(">> Запись не найдена, прерывание.\n");
         return 0;
     }
-    record * rec = search_record(book,name);
-    if (rec == NULL) return 0;
     get_phone(number);
     strcpy(rec->number,number);
+    return 1;
+}
+
+int update_record_rec(record * rec)
+{
+    char name[LEN_S];
+    char number[LEN_P];
+    
+    int m;
+    printf(">> Изменить имя - 1\n");
+    printf(">> Изменить телефон - 2\n");
+    printf(">> Отмена - other\n");
+    scanf("%d",&m);
+    getchar();
+    if (m == 1)
+    {
+        get_name(name); 
+        strcpy(rec->name,name);
+    }
+    if (m == 2)
+    {
+        get_phone(number);
+        strcpy(rec->number,number);
+    }
     return 1;
 }

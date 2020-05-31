@@ -5,6 +5,7 @@
 #define LEN_P 13
 #define SIZE_BOOK 26 //30
 
+
 static char lit[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //"АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ"; 
 static char small_letters[] = "abcdefghijklmnopqrstuvwxyz"; //"абвгдеёжзийклмнопрстуфхцчщщъыьэя";
 static char big_letters[]   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -33,5 +34,6 @@ void insert_rec(record **book, record *new_rec);
 record *search_record(record **book, char *name);
 int delete_record(record **book, char *name);
 int update_record(record **book);
+int update_record_rec(record * rec);
 
 #endif

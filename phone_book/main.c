@@ -3,8 +3,8 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <wchar.h>
-
-//  #include <clocale>
+//#include <windows.h>
+//#include <clocale>
  
 int main()
 {
@@ -15,8 +15,8 @@ int main()
     char name_book[LEN_S];
     char name[LEN_S];
     record **book;
-    int open_book = 0;
-    int change_book = 0;
+    int open_book = 0;   // Открыта ли книга?
+    int change_book = 0; // Были изменения в книге?
     
     int m1,m2,m3;
 
@@ -71,23 +71,34 @@ int main()
             }
             if (m2 == 2)
             {
-                printf("> 1 - найти\n");
-                printf("> 2 - найти и изменить\n");
-                printf("> 3 - назад\n> ");
-                scanf("%d", &m3);
-                getchar();
-                if (m3 == 1)
+                get_name(name);
+                record *rec = search_record(book, name);
+                if (rec == NULL) 
                 {
-                    get_name(name);
-                    record *rec = search_record(book, name);
-                    fputs(rec->number,stdout);
-                    putc('\n',stdout);
+                    printf("Запись не найдена!\n");
                 }
-                if (m3 == 2)
+                else
                 {
-                    update_record(book);
-                    change_book = 1;
+                    printf("> 1 - Найти номер\n");
+                    printf("> 2 - Изменить запись\n");
+                    printf("> 3 - Удилить запись\n> ");
+                    scanf("%d", &m3);
+                    getchar();
+                    if (m3 == 1)
+                    {
+                        fputs(rec->number,stdout);
+                        putc('\n',stdout);
+                    }
+                    if (m3 == 2)
+                    {
+                        change_book = update_record_rec(rec);
+                    }
+                    if (m3 == 3)
+                    {
+                        delete_record(book,name);
+                    }
                 }
+                
             }
         }
 
@@ -104,7 +115,7 @@ int main()
             {
                 printf("> Изменений нет. Завершение.\n");
             }
-            
+            free_book(book);
         }   
     }
 
