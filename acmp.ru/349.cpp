@@ -16,6 +16,7 @@ int main()
 		}
 	}
 
+
 	int n, m;
 	bool v = false;
 	cin >> n >> m;
